@@ -32,7 +32,7 @@ void showBmpInforHead(BITMAPINFOHEADER* pBmpInforHead)
 }
 
 int main(int argc, char* argv[]) {
-    printf("usage: %s bmp-filename", argv[0]);
+    printf("usage: %s bmp-filename\n\n", argv[0]);
     if (argc < 2) return 1;
     char* filename = argv[1];
 

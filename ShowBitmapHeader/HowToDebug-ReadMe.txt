@@ -1,0 +1,1 @@
+set folder: $(ProjectDir)\test_files\1080x1920_24bits.bmp in debug cmd line.
