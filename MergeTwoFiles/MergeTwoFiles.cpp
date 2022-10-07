@@ -44,6 +44,10 @@ int main(int argc, char* argv[]) {
 	const char* src_file2 = argv[2];
 	const char* dst_file = argv[3];
 
+	// trancate dst file
+	FILE* fd = fopen(dst_file, "wb");
+	fclose(fd);
+
 	// append source file1 to dst file
 	bool appended = AppendToFile(src_file1, dst_file);
 	if (!appended) {
