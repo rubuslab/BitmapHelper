@@ -10,7 +10,7 @@
 // https://stackoverflow.com/questions/27581750/android-capture-screen-to-surface-of-imagereader
 
 #pragma pack(push, 1)
-struct ARGB {
+/*struct ARGB {
 	unsigned char a;
 	unsigned char r;
 	unsigned char g;
@@ -28,6 +28,28 @@ struct BGRA {
 		a(argb.a),
 		b(argb.b)
 	    {
+	}
+};*/
+
+// PixelFormat.RGBA_8888
+struct ARGB {
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	unsigned char a;
+};
+
+struct BGRA {
+	unsigned char b;
+	unsigned char g;
+	unsigned char r;
+	unsigned char a;
+	BGRA(const ARGB& argb) :
+		g(argb.g),
+		r(argb.r),
+		a(argb.a),
+		b(argb.b)
+	{
 	}
 };
 #pragma pack(pop)
