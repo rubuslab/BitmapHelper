@@ -1,52 +1,25 @@
 #include <stdio.h>
 #include <windows.h>
 
-void showBmpHead(BITMAPFILEHEADER* pBmpHead)
-{
-    printf("位图文件头:\n");
-    unsigned char* type = (unsigned char*)(&(pBmpHead->bfType));
-    printf("bmp type: %c%c\n", type[0], type[1]);
-    printf("文件大小: %d\n", pBmpHead->bfSize);
-    printf("保留字: %d\n", pBmpHead->bfReserved1);
-    printf("保留字: %d\n", pBmpHead->bfReserved2);
-    printf("实际位图数据的偏移字节数: %d\n", pBmpHead->bfOffBits);
-}
-
-void showBmpInforHead(BITMAPINFOHEADER* pBmpInforHead)
-{
-    printf("位图信息头:\n");
-    printf("结构体的长度: %d\n", pBmpInforHead->biSize);
-    printf("位图宽: %d\n", pBmpInforHead->biWidth);
-    printf("位图高: %d\n", pBmpInforHead->biHeight);
-    printf("biPlanes平面数: %d\n", pBmpInforHead->biPlanes);
-    printf("biBitCount采用颜色位数: %d\n", pBmpInforHead->biBitCount);
-    printf("压缩方式: %d\n", pBmpInforHead->biCompression);
-    printf("biSizeImage实际位图数据占用的字节数: %d\n", pBmpInforHead->biSizeImage);
-    printf("image width stride: %d\n", pBmpInforHead->biSizeImage / pBmpInforHead->biHeight);
-    int stride = ((((pBmpInforHead->biWidth * pBmpInforHead->biBitCount) + 31) & ~31) >> 3);
-    printf("calculated image width stride: %d\n", stride);
-    printf("X方向分辨率: %d\n", pBmpInforHead->biXPelsPerMeter);
-    printf("Y方向分辨率: %d\n", pBmpInforHead->biYPelsPerMeter);
-    printf("使用的颜色数: %d\n", pBmpInforHead->biClrUsed);
-    printf("重要颜色数: %d\n", pBmpInforHead->biClrImportant);
-}
-
 // bitmap reference url
 // https://www.cnblogs.com/l2rf/p/5643352.html
 
 int main(int argc, char* argv[]) {
-    int width = 1080;
+    int width = 1088;
     int height = 1920;
     int bits = 32; // RGBA
-    const char* out_filename = "default.bmp_header";
+    char buffer[512] = { 0 };
+    const char* filename = "default.bmp_header";
 
     printf("usage: %s width height bits_per_pixel out_filename\n\n", argv[0]);
     if (argc >= 5) {
         width = atoi(argv[1]);
         height = atoi(argv[2]);
         bits = atoi(argv[3]);
-        out_filename = argv[4];
+        filename = argv[4];
     }
+    sprintf(buffer, "%s-%dx%d-%dbits\0", filename, width, height, bits);
+    const char* out_filename = (const char*)buffer;
     printf("\nparameters, width: %d, height: %d, bits: %d, out_filename:%s\n", width, height, bits, out_filename);
 
     // generate BITMAPFILEHEADER
