@@ -1,0 +1,2 @@
+add below line in debug cmd line.
+$(ProjectDir)..\GenerateBitmapHeader\default.bmp_header-1088x1920-32bits $(ProjectDir)..\GenerateBitmapHeader\test_files\rgb_1665116681013.yuv_1088x1920.rgba_data 1088x1920x32bits.bmp

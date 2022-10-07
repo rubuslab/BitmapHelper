@@ -54,8 +54,8 @@ int main(int argc, char* argv[]) {
     printf("bytes per line, stride: %d, image_size: %d, file_size: %d\n", stride, image_size, file_size);
     bmp_header.biSizeImage = image_size;
     // Print resolution of the image, 72 DPI × 39.3701 inches per metre yields 2834.6472
-    bmp_header.biXPelsPerMeter = 2835;
-    bmp_header.biYPelsPerMeter = 2835;
+    // bmp_header.biXPelsPerMeter = 2835;
+    // bmp_header.biYPelsPerMeter = 2835;
     bmp_header.biClrUsed = 0;
     bmp_header.biClrImportant = 0;
 
@@ -76,5 +76,5 @@ int main(int argc, char* argv[]) {
     bool success = (w_file_header == sizeof(file_header) && w_bmp_header == sizeof(bmp_header));
     printf("write bmp header to file: %s, %s.\n", out_filename, success ? "Successed": "Failed");
 
-    return success ? 0 : 1;    
+    return success ? 0 : 1;
 }
